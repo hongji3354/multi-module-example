@@ -1,16 +1,20 @@
 // root level에는 src가 없기 때문에 불필요한 plugin은 적용되지 않도록 false로 변경
 // org.springframework.boot plugin의 경우 false를 하지 않으면 bootJar Task에서 에러가 발생한다.
 plugins {
-    id 'org.springframework.boot' version '2.7.3' apply false
-    id 'io.spring.dependency-management' version '1.0.13.RELEASE' apply false
+    id 'org.springframework.boot' apply false
+    id 'io.spring.dependency-management' apply false
     id 'java'
 }
 
-sourceCompatibility = '17'
+def javaVersion = property('javaVersion')
+def projectGroup = property('projectGroup')
+def applicationVersion = property('applicationVersion')
+
+sourceCompatibility = javaVersion
 
 allprojects {
-    group = 'dev.jihun'
-    version = '0.0.1-SNAPSHOT'
+    group = projectGroup
+    version = applicationVersion
 
     repositories {
         mavenCentral()
