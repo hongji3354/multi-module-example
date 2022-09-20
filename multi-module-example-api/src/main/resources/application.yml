@@ -1,1 +1,24 @@
+spring.application.name: multi-module-example-api
+spring.profiles.active: local
+spring:
+  config:
+    import:
+      - logging.yml
+---
+spring.config.active.on-profile: local
 
+
+---
+spring.config.active.on-profile: local-dev
+
+
+---
+spring.config.active.on-profile: dev
+
+
+---
+spring.config.active.on-profile: staging
+
+
+---
+spring.config.active.on-profile: live
