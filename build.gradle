@@ -2,7 +2,7 @@
 // org.springframework.boot plugin의 경우 false를 하지 않으면 bootJar Task에서 에러가 발생한다.
 plugins {
     id 'org.springframework.boot' apply false
-    id 'io.spring.dependency-management' apply false
+    id 'io.spring.dependency-management'
     id 'java'
 }
 
