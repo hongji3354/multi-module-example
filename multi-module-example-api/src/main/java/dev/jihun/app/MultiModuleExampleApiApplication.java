@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MultiModuleExampleApplication {
+public class MultiModuleExampleApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MultiModuleExampleApplication.class, args);
+		SpringApplication.run(MultiModuleExampleApiApplication.class, args);
 	}
 
 }

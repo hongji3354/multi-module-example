@@ -1,22 +1,45 @@
+// root level에는 src가 없기 때문에 불필요한 plugin은 적용되지 않도록 false로 변경
+// org.springframework.boot plugin의 경우 false를 하지 않으면 bootJar Task에서 에러가 발생한다.
 plugins {
-    id 'org.springframework.boot' version '2.7.3'
-    id 'io.spring.dependency-management' version '1.0.13.RELEASE'
+    id 'org.springframework.boot' version '2.7.3' apply false
+    id 'io.spring.dependency-management' version '1.0.13.RELEASE' apply false
     id 'java'
 }
 
-group = 'dev.jihun'
-version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
-repositories {
-    mavenCentral()
+allprojects {
+    group = 'dev.jihun'
+    version = '0.0.1-SNAPSHOT'
+
+    repositories {
+        mavenCentral()
+    }
+
 }
 
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
 
-tasks.named('test') {
-    useJUnitPlatform()
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    }
+
+    // bootJar로 생성될 필요가 없는 모듈이 많기 때문에 false로 설정
+    // bootJar로 생성될 필요가 있는 모듈에서 Subproject에서 재정의
+    tasks.getByName("bootJar") {
+        enabled = false
+    }
+
+    // 위의 bootJar와 이유는 동일하다.
+    tasks.getByName("jar") {
+        enabled = true
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
 }
